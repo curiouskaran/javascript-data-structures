@@ -1,0 +1,24 @@
+{
+  "name": "ds",
+  "version": "1.0.0",
+  "description": "Data Structures in JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx babel $SOURCE --out-file $DEST"
+  },
+  "keywords": [
+    "Data",
+    "Structures",
+    "JS"
+  ],
+  "author": "Karan Sharma",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-private-methods": "^7.8.3",
+    "@babel/preset-env": "^7.9.5"
+  }
+}
