@@ -80,4 +80,88 @@ console.log(q.dequeue());
 console.log(q.dequeue());
 console.log(q.dequeue());
 console.log(q.isEmpty());
+
+var PriorityQueue = /*#__PURE__*/function () {
+  function PriorityQueue() {
+    _classCallCheck(this, PriorityQueue);
+
+    _collection2.set(this, {
+      writable: true,
+      value: []
+    });
+
+    this.isEmpty = this.isEmpty.bind(this);
+  }
+
+  _createClass(PriorityQueue, [{
+    key: "print",
+    value: function print() {
+      console.log(_classPrivateFieldGet(this, _collection2));
+    }
+  }, {
+    key: "enqueue",
+    value: function enqueue(element) {
+      if (this.isEmpty()) {
+        _classPrivateFieldGet(this, _collection2).push(element);
+      } else {
+        var added = false;
+
+        for (var i = 0; i < _classPrivateFieldGet(this, _collection2).length; i++) {
+          if (element[1] < _classPrivateFieldGet(this, _collection2)[i][1]) {
+            _classPrivateFieldGet(this, _collection2).splice(i, 0, element);
+
+            added = true;
+            break;
+          }
+        }
+
+        if (!added) {
+          _classPrivateFieldGet(this, _collection2).push(element);
+        }
+      }
+    }
+  }, {
+    key: "dequeue",
+    value: function dequeue() {
+      if (!this.isEmpty()) return _classPrivateFieldGet(this, _collection2).shift();
+      return false;
+    }
+  }, {
+    key: "front",
+    value: function front() {
+      return _classPrivateFieldGet(this, _collection2)[0];
+    }
+  }, {
+    key: "size",
+    value: function size() {
+      return _classPrivateFieldGet(this, _collection2).length;
+    }
+  }, {
+    key: "isEmpty",
+    value: function isEmpty() {
+      return _classPrivateFieldGet(this, _collection2).length === 0;
+    }
+  }]);
+
+  return PriorityQueue;
+}();
+
+var _collection2 = new WeakMap();
+
+var pq = new PriorityQueue();
+pq.enqueue(['karan', 3]);
+pq.enqueue(['khushboo', 3]);
+pq.enqueue(['papa', 2]);
+pq.enqueue(['mummy', 2]);
+pq.enqueue(['amma', 1]);
+pq.enqueue(['baba', 1]);
+pq.print();
+console.log(pq.size());
+console.log(pq.isEmpty());
+console.log(pq.dequeue());
+console.log(pq.dequeue());
+console.log(pq.dequeue());
+console.log(pq.dequeue());
+console.log(pq.dequeue());
+console.log(pq.isEmpty());
 "use strict";
