@@ -96,7 +96,7 @@ var BinarySearchTree = /*#__PURE__*/function () {
     value: function find(data) {
       var current = this.root;
 
-      while (current.data !== data) {
+      while (current && current.data !== data) {
         if (current === null) return null;
 
         if (data < current.data) {
@@ -175,13 +175,15 @@ var BinarySearchTree = /*#__PURE__*/function () {
 }();
 
 var t1 = new BinarySearchTree();
-t1.add(2);
-t1.add(5);
-t1.add(1);
-t1.add(17);
-t1.add(15);
+t1.add(9);
 t1.add(4);
-t1.add(2);
+t1.add(17);
+t1.add(3);
+t1.add(6);
+t1.add(22);
+t1.add(5);
+t1.add(7);
+t1.add(20);
 console.log('minimum', t1.findMin());
 console.log('maximum', t1.findMax());
 t1.remove(1);
@@ -190,5 +192,5 @@ console.log('minimum', t1.findMin());
 console.log('isPresent(1)', t1.isPresent(1));
 console.log('isPresent(5)', t1.isPresent(5));
 console.log('isPresent(17)', t1.isPresent(17));
-console.log('find(2)', t1.find(2));
+console.log('find(1)', t1.find(1));
 "use strict";
