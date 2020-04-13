@@ -203,6 +203,90 @@ var BinarySearchTree = /*#__PURE__*/function () {
     key: "isBalancedTree",
     value: function isBalancedTree() {
       return this.findMinHeight() >= this.findMaxHeight() - 1;
+    } //<Left><Root><Right> type of depthFirstTraversal
+
+  }, {
+    key: "inOrder",
+    value: function inOrder() {
+      if (this.root === null) {
+        return null;
+      } else {
+        var result = [];
+
+        var traverseInOrder = function traverseInOrder(node) {
+          node.left && traverseInOrder(node.left);
+          result.push(node.data);
+          node.right && traverseInOrder(node.right);
+        };
+
+        traverseInOrder(this.root);
+        return result;
+      }
+    } //<Root><Left><Right> type of depthFirstTraversal
+
+  }, {
+    key: "preOrder",
+    value: function preOrder() {
+      if (this.root === null) {
+        return null;
+      } else {
+        var result = [];
+
+        var traversePreOrder = function traversePreOrder(node) {
+          result.push(node.data);
+          node.left && traversePreOrder(node.left);
+          node.right && traversePreOrder(node.right);
+        };
+
+        traversePreOrder(this.root);
+        return result;
+      }
+    } //<Left><Right><Root> type of depthFirstTraversal
+
+  }, {
+    key: "postOrder",
+    value: function postOrder() {
+      if (this.root === null) {
+        return null;
+      } else {
+        var result = [];
+
+        var traversePostOrder = function traversePostOrder(node) {
+          node.left && traversePostOrder(node.left);
+          node.right && traversePostOrder(node.right);
+          result.push(node.data);
+        };
+
+        traversePostOrder(this.root);
+        return result;
+      }
+    } //level by level or layer by layer type of breadthFirstTraversal
+
+  }, {
+    key: "levelOrder",
+    value: function levelOrder() {
+      if (this.root === null) {
+        return null;
+      } else {
+        var result = [];
+        var q = [];
+        q.push(this.root);
+
+        while (q.length > 0) {
+          var node = q.shift();
+          result.push(node.data);
+
+          if (node.left !== null) {
+            q.push(node.left);
+          }
+
+          if (node.right !== null) {
+            q.push(node.right);
+          }
+        }
+
+        return result;
+      }
     }
   }]);
 
@@ -233,4 +317,8 @@ console.log('min height', t1.findMinHeight());
 console.log('is balanced', t1.isBalancedTree());
 t1.add(10);
 console.log('is balanced', t1.isBalancedTree());
+console.log('in-order traversal', t1.inOrder());
+console.log('pre-order traversal', t1.preOrder());
+console.log('post-order traversal', t1.postOrder());
+console.log('level-order traversal', t1.levelOrder());
 "use strict";

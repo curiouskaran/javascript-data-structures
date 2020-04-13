@@ -173,6 +173,83 @@ class BinarySearchTree {
   isBalancedTree() {
     return (this.findMinHeight() >= this.findMaxHeight() - 1);
   }
+
+  //<Left><Root><Right> type of depthFirstTraversal
+  inOrder() {
+    if(this.root === null) {
+      return null;
+    } else {
+      let result = [];
+
+      const traverseInOrder = (node) => {
+        node.left && traverseInOrder(node.left);
+        result.push(node.data);
+        node.right && traverseInOrder(node.right);
+      }
+      traverseInOrder(this.root);
+
+      return result;
+    }
+  }
+
+  //<Root><Left><Right> type of depthFirstTraversal
+  preOrder() {
+    if(this.root === null) {
+      return null;
+    } else {
+      let result = [];
+
+      const traversePreOrder = (node) => {
+        result.push(node.data);
+        node.left && traversePreOrder(node.left);
+        node.right && traversePreOrder(node.right);
+      }
+      traversePreOrder(this.root);
+
+      return result;
+    }
+  }
+
+  //<Left><Right><Root> type of depthFirstTraversal
+  postOrder() {
+    if(this.root === null) {
+      return null;
+    } else {
+      let result = [];
+
+      const traversePostOrder = (node) => {
+        node.left && traversePostOrder(node.left);
+        node.right && traversePostOrder(node.right);
+        result.push(node.data);
+      }
+      traversePostOrder(this.root);
+
+      return result;
+    }
+  }
+
+  //level by level or layer by layer type of breadthFirstTraversal
+  levelOrder() {
+    if(this.root === null) {
+      return null;
+    } else {
+      let result = [];
+      let q = [];
+
+      q.push(this.root);
+      while(q.length > 0) {
+        let node = q.shift();
+        result.push(node.data);
+        if(node.left !== null) {
+          q.push(node.left);
+        }
+        if(node.right !== null) {
+          q.push(node.right);
+        }
+      }
+      return result;
+    }
+  }
 }
 
 const t1 = new BinarySearchTree();
@@ -199,3 +276,7 @@ console.log('min height',t1.findMinHeight());
 console.log('is balanced',t1.isBalancedTree());
 t1.add(10);
 console.log('is balanced',t1.isBalancedTree());
+console.log('in-order traversal',t1.inOrder());
+console.log('pre-order traversal',t1.preOrder());
+console.log('post-order traversal',t1.postOrder());
+console.log('level-order traversal',t1.levelOrder());
