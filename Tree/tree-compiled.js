@@ -26,6 +26,8 @@ var BinarySearchTree = /*#__PURE__*/function () {
 
     this.root = null;
     this.removeNode = this.removeNode.bind(this);
+    this.findMaxHeight = this.findMaxHeight.bind(this);
+    this.findMinHeight = this.findMinHeight.bind(this);
   }
 
   _createClass(BinarySearchTree, [{
@@ -169,6 +171,39 @@ var BinarySearchTree = /*#__PURE__*/function () {
     value: function remove(data) {
       this.root = this.removeNode(this.root, data);
     }
+  }, {
+    key: "findMinHeight",
+    value: function findMinHeight() {
+      var node = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.root;
+      if (node === null) return -1;
+      var left = this.findMinHeight(node.left);
+      var right = this.findMinHeight(node.right);
+
+      if (left < right) {
+        return left + 1;
+      } else {
+        return right + 1;
+      }
+    }
+  }, {
+    key: "findMaxHeight",
+    value: function findMaxHeight() {
+      var node = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.root;
+      if (node === null) return -1;
+      var left = this.findMaxHeight(node.left);
+      var right = this.findMaxHeight(node.right);
+
+      if (left > right) {
+        return left + 1;
+      } else {
+        return right + 1;
+      }
+    }
+  }, {
+    key: "isBalancedTree",
+    value: function isBalancedTree() {
+      return this.findMinHeight() >= this.findMaxHeight() - 1;
+    }
   }]);
 
   return BinarySearchTree;
@@ -193,4 +228,9 @@ console.log('isPresent(1)', t1.isPresent(1));
 console.log('isPresent(5)', t1.isPresent(5));
 console.log('isPresent(17)', t1.isPresent(17));
 console.log('find(1)', t1.find(1));
+console.log('max height', t1.findMaxHeight());
+console.log('min height', t1.findMinHeight());
+console.log('is balanced', t1.isBalancedTree());
+t1.add(10);
+console.log('is balanced', t1.isBalancedTree());
 "use strict";

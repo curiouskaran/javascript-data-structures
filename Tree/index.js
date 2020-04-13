@@ -14,6 +14,8 @@ class BinarySearchTree {
   constructor() {
     this.root = null;
     this.removeNode = this.removeNode.bind(this);
+    this.findMaxHeight = this.findMaxHeight.bind(this);
+    this.findMinHeight = this.findMinHeight.bind(this);
   }
 
   add(data) {
@@ -141,6 +143,36 @@ class BinarySearchTree {
   remove(data) {
     this.root = this.removeNode(this.root,data);
   }
+
+  findMinHeight(node = this.root) {
+    if(node === null) return -1;
+
+    let left = this.findMinHeight(node.left);
+    let right = this.findMinHeight(node.right);
+
+    if(left < right) {
+      return left + 1;
+    } else {
+      return right + 1;
+    }
+  }
+
+  findMaxHeight(node = this.root) {
+    if(node === null) return -1;
+
+    let left = this.findMaxHeight(node.left);
+    let right = this.findMaxHeight(node.right);
+
+    if(left > right) {
+      return left + 1;
+    } else {
+      return right + 1;
+    }
+  }
+
+  isBalancedTree() {
+    return (this.findMinHeight() >= this.findMaxHeight() - 1);
+  }
 }
 
 const t1 = new BinarySearchTree();
@@ -162,3 +194,8 @@ console.log('isPresent(1)',t1.isPresent(1));
 console.log('isPresent(5)',t1.isPresent(5));
 console.log('isPresent(17)',t1.isPresent(17));
 console.log('find(1)',t1.find(1));
+console.log('max height',t1.findMaxHeight());
+console.log('min height',t1.findMinHeight());
+console.log('is balanced',t1.isBalancedTree());
+t1.add(10);
+console.log('is balanced',t1.isBalancedTree());
